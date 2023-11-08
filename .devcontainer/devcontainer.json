@@ -1,0 +1,16 @@
+{
+    "name": "BUN JavaScript",
+    "image": "oven/bun:1.0.7",
+    "customizations": {
+        "vscode": {
+            "extensions": ["oven.bun-vscode"],
+            "settings": {
+                "bun.debugTerminal.enabled": true,
+                "bun.runtime": "/usr/local/bin/bun"
+            }
+        }
+      },
+    "runArgs": ["--env-file",".devcontainer/devcontainer.env"],
+    "postCreateCommand": ["bun", "install"],
+    "shutdownAction":"stopContainer"
+}

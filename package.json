@@ -1,0 +1,14 @@
+{
+  "name": "bun_typescript_rd",
+  "module": "src\rdlib_workflow.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@refinitiv-data/data": "^3.12.0-beta"
+  }
+}
