@@ -181,3 +181,5 @@ src/session.config.json
 .devcontainer/devcontainer.env
 
 .vscode/
+src/*.zip
+src/*.gz
