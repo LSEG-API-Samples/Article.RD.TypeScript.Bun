@@ -1,6 +1,6 @@
 {
     "name": "BUN JavaScript",
-    "image": "oven/bun:1.0.7",
+    "image": "oven/bun:1.0.18",
     "customizations": {
         "vscode": {
             "extensions": ["oven.bun-vscode"],

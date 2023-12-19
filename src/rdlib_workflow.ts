@@ -15,6 +15,10 @@ const session = Session.Platform.Definition({
 	try {
 		console.log('Opening the session...');
 		
+        /*
+        * Step 1: Authentication with RDP APIs.
+        *
+        */
 		// open the session
 		await session.open();
 		
@@ -25,16 +29,16 @@ const session = Session.Platform.Definition({
         let response:any = null;
 
         /*
-        * Step 1: Listing the packageId using the Bucket Name
+        * Step 2: Listing the packageId using the Bucket Name
         * 
         * To request the CFS Bulk data, the first step is to send an HTTP ```GET``` request to the RDP 
-        * ```/file-store/v1/file-sets?bucket={bucket-name}``` endpoint to list all FileSets under the input ```bucket-name```.
+        * ```/file-store/v1/packages?bucketName={bucket-name}``` endpoint to list all package Ids under the input ```bucket-name```.
         * 
         */
         // const bucket_name: string = process.env.RDP_BUCKET_NAME || '';
         const bucket_name: string = 'bulk-ESG';
 
-        response = await bulkFile.listPackageId(bucket_name);
+        response = await bulkFile.listPackageIds(bucket_name);
         if(response.data['value'].length === 0){
             console.log('No data received');
             process.exit(1);
@@ -42,7 +46,7 @@ const session = Session.Platform.Definition({
         console.log(`Received data: ${JSON.stringify(response.data['value'][0], null, ' ')}`);
 
         /*
-        * Step 2: Listing the Filesets of the Bulk ESG Data with the packageId
+        * Step 3: Listing the Filesets of the Bulk ESG Data with the packageId
         *
         * The next step is calling the CFS API with the buket name and package Id to list all FileSets using **the package Id**.
         *
@@ -50,7 +54,7 @@ const session = Session.Platform.Definition({
         */
         // const package_id: string = process.env.RDP_PACKAGE_ID || '';
         const package_id: string = '4173-aec7-8a0b0ac9-96f9-48e83ddbd2ad';
-        response = await bulkFile.listBucket_FileID(bucket_name, package_id);
+        response = await bulkFile.listBucket_FileSets(bucket_name, package_id);
         if(response.data['value'].length === 0){
             console.log('No data received');
             process.exit(1);
@@ -62,7 +66,7 @@ const session = Session.Platform.Definition({
         console.log(file_id);
 
         /*
-        * Step 3: Get the Bulk file URL on AWS S3
+        * Step 4: Get the file URL on AWS S3
         * 
         * The last step is downloading the FIle using File ID with the RDP ```/file-store/v1/files/{file ID}/stream``` endpoint.
         * 
@@ -72,7 +76,7 @@ const session = Session.Platform.Definition({
         console.log(`Received data: ${JSON.stringify(response.data['url'], null, ' ')}`);
 
         /*
-        * Step 4: Downloading the file
+        * Step 5: Downloading the file
         * 
         * You need to replace the escaped character ```%3A``` with ```_``` (underscore) character before loading the file.
         * 
@@ -99,15 +103,6 @@ const session = Session.Platform.Definition({
 
         const file_name: string = zip_filename.split('.gz')[0];
 
-        // //step 5 - unzip file
-        // console.log(`Unzipping ${zip_filename}`);
-        // fs.createReadStream(zip_filename).pipe(zlib.createGunzip()).pipe(fs.createWriteStream(file_name));
-        // console.log(`Unzipping ${zip_filename} to ${file_name} success`);
-
-        // //step 6 - read file
-        //await Bun.sleep(1000); // sleep for a while to wait for the bulk file is fully written on disk
-        //await bulkFile.extractFile(zip_filename, file_name);
-        // console.log(await Bun.file(file_name).text());
         await Bun.sleep(1000); // sleep for a while to wait for the bulk file is fully written on disk
         
 	} 

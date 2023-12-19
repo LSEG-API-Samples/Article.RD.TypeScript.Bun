@@ -9,6 +9,6 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@refinitiv-data/data": "^3.12.0-beta"
+    "@refinitiv-data/data": "^3.13.1-beta"
   }
 }
