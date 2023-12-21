@@ -48,12 +48,12 @@ const green_revenue_resp = await fetch(green_revenue_url, {
 })
 
 if (!green_revenue_resp.ok){
-    console.log('Requestion Green Revenue Failed')
+    console.log('Request Green Revenue Failed')
     const status_text = await green_revenue_resp.text()
     console.log(`HTTP error!: ${green_revenue_resp.status} ${status_text}`)
     process.exitCode = 1
 } else {
-    console.log('Requestion Green Revenue Granted')
+    console.log('Request Green Revenue Granted')
     //Parse response to JSON
     const green_revenue_response = await green_revenue_resp.json()
     console.log(green_revenue_response)

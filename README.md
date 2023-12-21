@@ -112,5 +112,17 @@ The first step is to unzip or download the example project folder into a directo
     ```bash
     bun src\rdlib_workflow.ts
     ```
-[To be done]
+## <a id="references"></a>References
+
+That brings me to the end of my Bun - RD TypeScript project. For further details, please check out the following resources:
+
+* [Refinitiv Data Library for TypeScript page](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) on the [LSEG Developer Community](https://developers.lseg.com/) website.
+* [Refinitiv Data Libraries Family page](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-libraries).
+* [Getting started with Refinitiv Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/quick-start).
+* [Refinitiv Data Library for TypeScript Tutorials](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/tutorials).
+* [Refinitiv Data Library for TypeScript Examples](https://github.com/LSEG-API-Samples/Example.DataLibrary.TypeScript).
+* [Bun Official website](https://bun.sh/).
+
+
+For any questions related to Refinitiv Data Library for TypeScript, please use the [Developers Community Q&A page](https://community.developers.refinitiv.com/) page.
 

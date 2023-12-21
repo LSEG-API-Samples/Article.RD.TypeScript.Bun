@@ -183,3 +183,5 @@ src/session.config.json
 .vscode/
 src/*.zip
 src/*.gz
+*.zip
+*.gz

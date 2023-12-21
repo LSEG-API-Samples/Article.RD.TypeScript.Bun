@@ -1,5 +1,5 @@
 {
-    "name": "BUN JavaScript",
+    "name": "BUN RD TypeScript",
     "image": "oven/bun:1.0.18",
     "customizations": {
         "vscode": {
