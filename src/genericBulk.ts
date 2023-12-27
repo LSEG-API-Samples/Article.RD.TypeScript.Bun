@@ -48,7 +48,7 @@ export class GenericBulkFile {
     /*
     * Step 3: Listing the Filesets of the Bulk ESG Data with the packageId
     *
-    * The next step is calling the CFS API with the buket name and package Id to list all FileSets using **the package Id**.
+    * The next step is calling the CFS API with the bucket name and package Id to list all FileSets using **the package Id**.
     *
     * API endpoint is ```/file-store/v1/file-sets?bucket={bucket-name}&packageId={packageId}```
     */
