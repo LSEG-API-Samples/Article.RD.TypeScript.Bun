@@ -50,7 +50,7 @@ export class GenericBulkFile {
     *
     * The next step is calling the CFS API with the buket name and package Id to list all FileSets using **the package Id**.
     *
-    * API endpint is ```/file-store/v1/file-sets?bucket={bucket-name}&packageId={packageId}```
+    * API endpoint is ```/file-store/v1/file-sets?bucket={bucket-name}&packageId={packageId}```
     */
     listBucket_FileSets = async (bucket_name = '', package_id = '') => {
 

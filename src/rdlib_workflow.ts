@@ -35,7 +35,6 @@ const session = Session.Platform.Definition({
         * ```/file-store/v1/packages?bucketName={bucket-name}``` endpoint to list all package Ids under the input ```bucket-name```.
         * 
         */
-        // const bucket_name: string = process.env.RDP_BUCKET_NAME || '';
         const bucket_name: string = 'bulk-greenrevenue';
 
         response = await bulkFile.listPackageIds(bucket_name);
@@ -50,9 +49,8 @@ const session = Session.Platform.Definition({
         *
         * The next step is calling the CFS API with the buket name and package Id to list all FileSets using **the package Id**.
         *
-        * API endpint is ```/file-store/v1/file-sets?bucket={bucket-name}&packageId={packageId}```
+        * API endpoint is ```/file-store/v1/file-sets?bucket={bucket-name}&packageId={packageId}```
         */
-        // const package_id: string = process.env.RDP_PACKAGE_ID || '';
         const package_id: string = '4e94-6d63-fea034dc-90e2-de33895bd4e9';
         response = await bulkFile.listBucket_FileSets(bucket_name, package_id);
         if(response.data['value'].length === 0){
