@@ -1,8 +1,9 @@
 {
-  "name": "bun_typescript_rd",
-  "module": "src\rdlib_workflow.ts",
+  "name": "bun_datalibrary_ts",
+  "module": "src/rdlib_cfsWorkflow.ts",
   "type": "module",
   "devDependencies": {
+    "@types/bun": "^1.0.0",
     "bun-types": "latest"
   },
   "peerDependencies": {

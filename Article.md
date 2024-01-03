@@ -4,14 +4,15 @@
 
 [Bun](https://bun.sh/) is a new JavaScript runtime that aims to be *a drop-in replacement for [Node.js](https://nodejs.org/en/)* with faster startup and run time, more optimized API, and provides a complete toolkit for JavaScript/TypeScript developers.
 
-Bun [just released version 1.0](https://www.youtube.com/watch?v=BsnCpESUEqM) ("production-ready") on September 2023 (the current version is 1.0.7, as of November 2023).
+Bun [just released version 1.0](https://www.youtube.com/watch?v=BsnCpESUEqM) ("production-ready") on September 2023 (the current version is 1.0.21, as of January 2024).
 
 One of Bun features is the [Node.js compatibility](https://bun.sh/docs/runtime/nodejs-apis). Most [NPM](https://www.npmjs.com/) modules intended to work with Node.js will work with Bun out of the box. This is a good opportunity to test [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) with Bun runtime to consume data from [Refinitiv Data Platform (RDP)](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis) as an experimental project.
 
 This example project shows how to implement a console [TypeScript](https://www.typescriptlang.org) application to retrieve financial data using ease-of-use [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) on Bun runtime.  
 
 **Note**:
-Please be informed that this demo project aims for Development and POC purposes only. 
+- Please be informed that this demo project aims for Development and POC purposes only. The Data Library for TypeScript/JavaScript is not tested and qualified with Bun runtime.
+- This project uses Bun version 1.0.18.
 
 ## <a id="bun_intro"></a>What is Bun?
 
@@ -32,7 +33,7 @@ For more detail about Bun runtime, please check the following resources:
 - [Bun Guide](https://bun.sh/guides).
 - [Bun Document](https://bun.sh/docs).
 
-This project was created using `bun init` in bun v1.0.18. 
+This project was created using `bun init` command in bun v1.0.18. 
 
 ## Step 1: Setting Up Bun Development environment.
 
@@ -59,15 +60,15 @@ The first step is creating a file name ```devcontainer.json``` in the ```.devcon
 
 Then open the VS Code Command Palette with the ```F1``` key, and then select the **Remote-Containers: Reopen in Container** command.
 
-![Alt text](images/02_reopenincontainer.png)
+![figure-02](images/02_reopenincontainer.png)
 
 Once this build is completed, VS Code automatically connects to the Bun container and you get a ready-to-use Bun development environment. 
 
-![Alt text](images/03_bun_docker.png)
+![figure-03](images/03_bun_docker.png)
 
 The next step is creating an empty Bun project with the interactive [bun init](https://bun.sh/docs/cli/init) command.
 
-![Alt text](images/04_bun_init.png)
+![figure-04](images/04_bun_init.png)
 
 You see that Bun simplify how you can create a development project with minimal interactive questions and gives you all necessary project files such as ```package.json```, ```.gitignore```, ```README.md```, ```tsconfig.json```.
 
@@ -132,7 +133,7 @@ This Bun development environment is ready for implementing the RDP HTTP applicat
 ```
 Result:
 
-![Alt text](images/05_bun_pure_rdp_result.png)
+![figure-05](images/05_bun_pure_rdp_result.png)
 
 Let's leave this core RDP HTTP APIs application implementation there. I am going to use the Data Library for TypeScript to connect and consume data from RDP platform instead.
 
@@ -140,7 +141,7 @@ Let's leave this core RDP HTTP APIs application implementation there. I am going
 
 The Data Library for TypeScript is an ease-of-use API defining a set of uniform interfaces providing the developer access to the Refinitiv Data Platform.  The APIs are designed to provide consistent access through multiple access channels, spanning multiple programming languages that target both Professional Developers and Financial Coders.  Developers can choose to access content from the desktop, within a desktop container, through their deployed streaming services, or directly to the cloud.  The interfaces encompass a set of unified Web APIs providing access to both streaming (over WebSockets) and non-streaming (HTTP REST) data available within the platform.
 
-![Figure-1](images/rdlib_image.png "Data Library Diagram") 
+![figure-06](images/rdlib_image.png "Data Library Diagram") 
 
 The RDP Library are available in the following programming languages:
 - [Python](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python)
@@ -162,16 +163,19 @@ This project is based on RD Library TypeScript versions **3.13-1-beta** using th
 The Data Library for TypeScript/JavaScript is available on the [npm](https://www.npmjs.com/package/@refinitiv-data/data) package manager platform. We can install the library to our project with the following command
 
 ```bash
-$bun install @refinitiv-data/data
+$bun add @refinitiv-data/data
+
+$bun add -d @types/bun 
 ```
 Once the installation is succeed, the Data Library dependency will be added to the project's package.json file.
 
 ```JSON
 {
-  "name": "bun_typescript_rd",
-  "module": "src\rdlib_workflow.ts",
+  "name": "bun_datalibrary_ts",
+  "module": "src/rdlib_cfsWorkflow.ts",
   "type": "module",
   "devDependencies": {
+    "@types/bun": "^1.0.0",
     "bun-types": "latest"
   },
   "peerDependencies": {
@@ -213,7 +217,7 @@ const session = Session.Platform.Definition({
 })();
 ```
 Result:
-![Alt text](images/06_bun_testsession.png)
+![figure-07](images/06_bun_testsession.png)
 
 That covers the Data Library installation in our Bun project.
 
@@ -539,7 +543,6 @@ Session successfully opened
 Received data: {
  "packageId": "4316-d43b-81c40763-8e6a-0dbec8162ab1",
  "packageName": "Bulk-GR-Global-Standard-Full-v1",
- "contactEmail": "naveen@lseg.com",
  "created": "2022-09-30T13:45:54Z",
  "modified": "2023-02-10T09:41:50Z",
  "packageType": "bulk",
@@ -579,6 +582,72 @@ Requesting File Success
 Downloading Bulk-GR-Global-Summary-Full-v1-Delta-2023-12-03T21_00_23.469Z.jsonl.gz success
 Closing the session...
 ```
+
+## Bundler 
+
+A bundler is development tool for combinding multilple JavaScript/TypeScript files into a single file that optimized to be run in the client environment (web browsers, node runtime, etc). This single static file helps the client machine does not need to fetch many files including multiple dependencies. 
+
+While the Node.js applications need to use external tools like [Webpack](https://webpack.js.org/), [Parcel](https://parceljs.org/), [Rollup](https://rollupjs.org/), etc for the module bulder, Bun has a native [bundler tool](https://bun.sh/docs/bundler) out of the box. Developer can use a ```bun build``` command to produce a single distribution file.
+
+**Note**: Bun's fast native bundler is now in beta phase.
+
+### How to Bundler the Project
+
+Developers can use a ```bun build``` CLI command or the ```Bun.build()``` API. This article is focusing on the CLI command as follows:
+
+```bash
+$bun build --entrypoints {entrypoint} --outdir ./build --target {target} --minify
+```
+- *entrypoints*: (Required) An array of paths corresponding to the entrypoints of our application. One bundle will be generated for each entrypoint.
+- *outdir*: (Required) The directory where output files will be written.
+- *target*: The intended execution environment for the bundle. Now supports *browser* (default), *bun* (for generating bundles that are intended to be run by the Bun runtime), and *node* (for generating bundles that are intended to be run by Node.js)
+- *minify*: To enable minification, False by default. 
+
+I am showing how to bundler the ```rdlib_cfsWorkflow``` application as follows:
+
+```bash
+root:/workspaces/Bun_Typscript_RD# bun build ./src/rdlib_cfsWorkflow.ts --outdir ./build --target node --minify
+
+  ./rdlib_cfsWorkflow.js  896.68 KB
+
+[1.87s] bundle 567 modules
+root:/workspaces/Bun_Typscript_RD# 
+```
+
+Result:
+![figure-08](images/07_bun_bundler.png)
+
+Then, we can run a ```./build/rdlib_cfsWorkflow.js``` application file to get the CFS data from RDP the same way as the ```rdlib_cfsWorkflow``` application.
+
+```bash
+root@:/workspaces/Bun_Typscript_RD/build# bun run rdlib_cfsWorkflow.js 
+[2024-01-03T10:07:20.585Z][ INFO][session:platform] Create session
+Opening the session...
+Session successfully opened
+[2024-01-03T10:07:21.308Z][ INFO][session:platform] Begin request sending...
+Received data: {
+ "packageId": "4316-d43b-81c40763-8e6a-0dbec8162ab1",
+ "packageName": "Bulk-GR-Global-Standard-Full-v1",
+ "created": "2022-09-30T13:45:54Z",
+ "modified": "2023-02-10T09:41:50Z",
+ "packageType": "bulk",
+ "bucketNames": [
+  "bulk-GreenRevenue"
+ ]
+}
+...
+```
+
+Please check [Bun.Build](https://bun.sh/docs/bundler) document for more detail about Bun bundler tool and parameters.
+
+## Conclusion
+
+While the [Node.js](https://nodejs.org/en) is still a de factor platform for the JavaScript/TypeScript application development, [Bun](https://bun.sh/) is a good alternative platform for JavaScript/TypeScript developers. It provides a fast runtime, simplify APIs, well written document, and all-in-one toolkit (development, runtime, test, and bundler) for developers. The Node.js-compatible package manager is also a killer feature that makes Node.js developers feel right-at-home when using Bun.
+
+This leads to how easy to use Bun with the easy-to-use [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript). When combining the library development experience with Bun runtime and toolset, developers can create applications that connect and consume data from Refinitiv Data Platform (RDP) easier and faster when comparing to using Node.js.
+
+However, please be noticed that the Data Library for TypeScript is not qualified with Bun runtime yet. But this Prove of Concept (POC) project shows that once the Bun becomes a *mainstream* platform, developers can start using it with the Data Library with confident. 
+
 
 
 

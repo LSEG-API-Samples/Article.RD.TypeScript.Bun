@@ -1,17 +1,22 @@
 # Experimenting Bun JavaScript Runtime with Data Library - TypeScript
+- version: 1.0
+- Last update: January 2024
+- Environment: VS Code Devcontainer, Docker
+- Prerequisite: [Prerequisite](#prerequisite)
 
 ## Overview
 
 [Bun](https://bun.sh/) is a new JavaScript runtime that aims to be *a drop-in replacement for [Node.js](https://nodejs.org/en/)* with faster startup and run time, more optimized API, and provides a complete toolkit for JavaScript/TypeScript developers.
 
-Bun [just released version 1.0](https://www.youtube.com/watch?v=BsnCpESUEqM) ("production-ready") on September 2023 (the current version is 1.0.7, as of November 2023).
+Bun [just released version 1.0](https://www.youtube.com/watch?v=BsnCpESUEqM) ("production-ready") on September 2023 (the current version is 1.0.21, as of January 2024).
 
 One of Bun features is the [Node.js compatibility](https://bun.sh/docs/runtime/nodejs-apis). Most [NPM](https://www.npmjs.com/) modules intended to work with Node.js will work with Bun out of the box. This is a good opportunity to test [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) with Bun runtime to consume data from [Data Platform APIs (RDP)](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis) as an experimental project.
 
 This example project shows how to implement a console [TypeScript](https://www.typescriptlang.org) application to retrieve financial data using ease-of-use [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) on Bun runtime.  The project is implemented and run in a controlled environment such as [Docker](https://www.docker.com/) and [devcontainer](https://code.visualstudio.com/docs/remote/containers) using the [Bun Docker Image](https://hub.docker.com/r/oven/bun).
 
 **Note**:
-Please be informed that this demo project aims for Development and POC purposes only. 
+- Please be informed that this demo project aims for Development and POC purposes only. The Data Library for TypeScript/JavaScript is not tested and qualified with Bun runtime.
+- This project uses Bun version 1.0.18.
 
 ## <a id="bun_intro"></a>What is Bun?
 
@@ -32,8 +37,7 @@ For more detail about Bun runtime, please check the following resources:
 - [Bun Guide](https://bun.sh/guides).
 - [Bun Document](https://bun.sh/docs).
 
-This project was created using `bun init` in bun v1.0.18. 
-
+This project was created using `bun init` command in bun v1.0.18. 
 
 ## <a id="rdp_lib"></a>Introduction to the Data Library for TypeScript
 
@@ -78,6 +82,10 @@ This project uses [Docker Desktop](https://www.docker.com/products/docker-deskto
 
 Optionally, you can use the [Visual Studio Code](https://code.visualstudio.com/) with [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension to run and debug the example code.
 
+## <a id="development_detail"></a>Development Detail
+
+Please check the [Article.md](./Article.md) document page.
+
 ## <a id="how_to_run"></a>How to run the demo application
 
 The first step is to unzip or download the example project folder into a directory of your choice, then set up Python or Postman environments based on your preference.
@@ -111,12 +119,14 @@ The first step is to unzip or download the example project folder into a directo
 
 That brings me to the end of my Bun - RD TypeScript project. For further details, please check out the following resources:
 
-* [Refinitiv Data Library for TypeScript page](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) on the [LSEG Developer Community](https://developers.lseg.com/) website.
-* [Refinitiv Data Libraries Family page](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-libraries).
-* [Getting started with Refinitiv Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/quick-start).
-* [Refinitiv Data Library for TypeScript Tutorials](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/tutorials).
-* [Refinitiv Data Library for TypeScript Examples](https://github.com/LSEG-API-Samples/Example.DataLibrary.TypeScript).
+* [Data Library for TypeScript page](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) on the [LSEG Developer Community](https://developers.lseg.com/) website.
+* [Data Libraries Family page](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-libraries).
+* [Getting started with Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/quick-start).
+* [Data Library for TypeScript Tutorials](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/tutorials).
+* [Data Library for TypeScript Examples](https://github.com/LSEG-API-Samples/Example.DataLibrary.TypeScript).
 * [Bun Official website](https://bun.sh/).
+* [Bun Official Documents](https://bun.sh/docs).
+* [Bun Official Guides](https://bun.sh/guides).
 
 
 For any questions related to Refinitiv Data Library for TypeScript, please use the [Developers Community Q&A page](https://community.developers.refinitiv.com/) page.
