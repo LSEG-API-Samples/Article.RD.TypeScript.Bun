@@ -1,15 +1,12 @@
-import zlib from 'zlib';
-import fs from 'fs';
 import { Session,Delivery } from '@refinitiv-data/data';
-import { FileSystemRouter } from 'bun';
 
-export class GenericBulkFile {
+export class GenericCFSFile {
     session: Session.Session;
-    bulk_api_version: string;
+    cfs_api_version: string;
 
     constructor(session:any, version = 'v1'){
         this.session = session;
-        this.bulk_api_version = version;
+        this.cfs_api_version = version;
     }
 
     /*
@@ -20,7 +17,7 @@ export class GenericBulkFile {
     * 
     */
 
-     listPackageIds = async (bucket_name = '') => {
+    listPackageIds = async (bucket_name = '') => {
 
         if(bucket_name.length === 0){
             throw new Error('Received invalid (None or Empty) argument');
@@ -28,19 +25,19 @@ export class GenericBulkFile {
 
         let response:any = {};
         try{
-            let param: Delivery.EndpointRequestDefinitionParams = {
-                url: `/file-store/${this.bulk_api_version}/packages`,
-                queryParameters: { 
-                    'bucketName' : bucket_name}
+            const param: Delivery.EndpointRequestDefinitionParams = {
+                url: `/file-store/${this.cfs_api_version}/packages`,
+                method: Delivery.EndpointRequest.Method.GET,
+                queryParameters: { 'bucketName' : bucket_name}
             };
            
-            let def = Delivery.EndpointRequest.Definition(param);
+            const def = Delivery.EndpointRequest.Definition(param);
             response = await def.getData(this.session);
         }
         catch (err) {
-            console.log(`Failed to request RDP /file-store/${this.bulk_api_version}/packages`);
+            console.log(`Failed to request RDP /file-store/${this.cfs_api_version}/packages`);
             console.log(err);
-            throw new Error(`Failed to request RDP /file-store/${this.bulk_api_version}/packages`);
+            throw new Error(`Failed to request RDP /file-store/${this.cfs_api_version}/packages`);
         } 
         return response;
     }
@@ -60,20 +57,21 @@ export class GenericBulkFile {
 
         let response:any = {};
         try{
-            let param: Delivery.EndpointRequestDefinitionParams = {
-                url: `/file-store/${this.bulk_api_version}/file-sets`,
+            const param: Delivery.EndpointRequestDefinitionParams = {
+                url: `/file-store/${this.cfs_api_version}/file-sets`,
+                method: Delivery.EndpointRequest.Method.GET,
                 queryParameters: { 
                     'bucket' : bucket_name,
                     'packageId': package_id}
             };
            
-            let def = Delivery.EndpointRequest.Definition(param);
+            const def = Delivery.EndpointRequest.Definition(param);
             response = await def.getData(this.session);
         }
         catch (err) {
-            console.log(`Failed to request RDP /file-store/${this.bulk_api_version}/file-sets`);
+            console.log(`Failed to request RDP /file-store/${this.cfs_api_version}/file-sets`);
             console.log(err);
-            throw new Error(`Failed to request RDP /file-store/${this.bulk_api_version}/file-sets`);
+            throw new Error(`Failed to request RDP /file-store/${this.cfs_api_version}/file-sets`);
         } 
         return response;
     }
@@ -93,20 +91,20 @@ export class GenericBulkFile {
         let response:any = {};
         
         try{
-            let param = {
-                url: `/file-store/${this.bulk_api_version}/files/{file_id}/stream`,
+            const param = {
+                url: `/file-store/${this.cfs_api_version}/files/{file_id}/stream`,
+                method: Delivery.EndpointRequest.Method.GET,
                 pathParameters: { 'file_id': file_id},
-                queryParameters: { 
-                    'doNotRedirect' : 'true'}
+                queryParameters: { 'doNotRedirect' : 'true'}
             };
     
-            let def = Delivery.EndpointRequest.Definition(param);
+            const def = Delivery.EndpointRequest.Definition(param);
             response = await def.getData(this.session);
         }
         catch (err) {
-            console.log(`Failed to request RDP /file-store/${this.bulk_api_version}/files/${file_id}/stream`);
+            console.log(`Failed to request RDP /file-store/${this.cfs_api_version}/files/${file_id}/stream`);
             console.log(err);
-            throw new Error(`Failed to request RDP /file-store/${this.bulk_api_version}/files/${file_id}/stream`);
+            throw new Error(`Failed to request RDP /file-store/${this.cfs_api_version}/files/${file_id}/stream`);
         } 
         return response;
     }
@@ -126,7 +124,7 @@ export class GenericBulkFile {
 
         let response:any = {};
         try{
-            response =await fetch(file_url, {
+            response = await fetch(file_url, {
                 method: 'GET'
             });
         }

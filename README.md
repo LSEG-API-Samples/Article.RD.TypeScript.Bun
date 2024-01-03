@@ -91,11 +91,6 @@ The first step is to unzip or download the example project folder into a directo
     RDP_USERNAME=<Your RDP Username>
     RDP_PASSWORD=<Your RDP Password>
     RDP_APP_KEY=<Your RDP App key>
-
-    RDP_BASE_URL=https://api.refinitiv.com
-    RDP_AUTH_URL=/auth/oauth2/v1/token
-    RDP_BUCKET_NAME=<Bucket-Name>
-    RDP_PACKAGE_ID=<Package Id>
     ```
     Please contact your LSEG representative for the Bucket-Name and Package Id information.
 4. Open the VS Code Command Palette with the ```F1``` key, and then select the **Remote-Containers: Reopen in Container** command.
@@ -103,14 +98,14 @@ The first step is to unzip or download the example project folder into a directo
 6. To run the RD - Library content layer examples:
 
     ```bash
-    bun src\rdlib_historical-pricing.ts
+    bun run src\rdlib_historical-pricing.ts
 
-    bun src\rdlib_news.ts
+    bun run src\rdlib_news.ts
     ```
 7. To run the RD - Library Delivery layer examples:
 
     ```bash
-    bun src\rdlib_workflow.ts
+    bun run src\rdlib_cfsWorkflow.ts
     ```
 ## <a id="references"></a>References
 

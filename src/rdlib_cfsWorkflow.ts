@@ -1,7 +1,6 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { Session } from '@refinitiv-data/data';
-
-import {GenericBulkFile} from './genericBulk.ts';
+import {GenericCFSFile} from './genericCFS.ts';
 
 const session = Session.Platform.Definition({
     appKey: process.env.RDP_APP_KEY || ''!,
@@ -24,7 +23,7 @@ const session = Session.Platform.Definition({
 		
 		console.log('Session successfully opened');
 
-        const bulkFile = new GenericBulkFile(session);
+        const cfsFile = new GenericCFSFile(session);
 
         let response:any = null;
 
@@ -37,7 +36,7 @@ const session = Session.Platform.Definition({
         */
         const bucket_name: string = 'bulk-greenrevenue';
 
-        response = await bulkFile.listPackageIds(bucket_name);
+        response = await cfsFile.listPackageIds(bucket_name);
         if(response.data['value'].length === 0){
             console.log('No data received');
             process.exit(1);
@@ -52,7 +51,7 @@ const session = Session.Platform.Definition({
         * API endpoint is ```/file-store/v1/file-sets?bucket={bucket-name}&packageId={packageId}```
         */
         const package_id: string = '4e94-6d63-fea034dc-90e2-de33895bd4e9';
-        response = await bulkFile.listBucket_FileSets(bucket_name, package_id);
+        response = await cfsFile.listBucket_FileSets(bucket_name, package_id);
         if(response.data['value'].length === 0){
             console.log('No data received');
             process.exit(1);
@@ -70,7 +69,7 @@ const session = Session.Platform.Definition({
         * 
         */
 
-        response = await bulkFile.getBucket_FileURL(file_id);
+        response = await cfsFile.getBucket_FileURL(file_id);
         console.log(`Received data: ${JSON.stringify(response.data['url'], null, ' ')}`);
 
         /*
@@ -85,7 +84,7 @@ const session = Session.Platform.Definition({
         
         console.log(`Downloading ${zip_filename}`);
 
-        const file_response = await bulkFile.downloadFile(file_url);
+        const file_response = await cfsFile.downloadFile(file_url);
 
         if (!file_response.ok){
             console.log('Requesting File Failed');
@@ -99,9 +98,7 @@ const session = Session.Platform.Definition({
             console.log(`Downloading ${zip_filename} success`);
         }
 
-        const file_name: string = zip_filename.split('.gz')[0];
-
-        await Bun.sleep(1000); // sleep for a while to wait for the bulk file is fully written on disk
+        await Bun.sleep(1000); // sleep for a while to wait for the file is fully written on disk
         
 	} 
 	catch (err) {

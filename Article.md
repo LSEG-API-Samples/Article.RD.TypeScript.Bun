@@ -392,6 +392,193 @@ That is all for the Content Layer.
 
 ## Step 4: The Delivery Layer 
 
-The Delivery layer refers to lowest abstraction layer of the library. 
+The Delivery layer refers to lowest abstraction layer of the library such as Level 1 & 2 Streaming Data and Request/Reply data endpoints interfaces, etc. This article is focusing on the Delivery interface to retrieve LSEG content directly from an Endpoint.
 
-[To be done]
+### Endpoint Interface
+
+The Endpoint interface allows the application to request LSEG data/content from the RDP data endpoint URL directly. Unlike sending the HTTP requests to the RDP RESTFul API directly, the application with Endpoint interface does not need to manual sends authentication request and access token to the endpoint because the Library always manages that process for the application.
+
+The summary steps are as follows:
+1. Open the session
+2. Defining an Endpoint. Defining an Endpoint At the heart of the Endpoint Request interfaces, is the data endpoint URL. 
+3. Defining Endpoint Request Properties such as Query Parameters, Path Parameters, Headers, or Body Parameters (for the HTTP POST).
+
+The examples of the data endpoint URLs are as follows:
+* Historical Pricing: https://api.refinitiv.com/data/historical-pricing/v1/views/events
+* News Headlines: https://api.refinitiv.com/data/news/v1/headlines
+* Symbology Lookup: https://api.refinitiv.com/discovery/symbology/v1/lookup
+* Basic ESG scores: https://api.refinitiv.com/data/environmental-social-governance/v2/views/basic
+
+Please find more detail about the endpoint URLs and parameters of each API from the [API Playground page](https://apidocs.refinitiv.com/Apps/ApiDocs).
+
+I am demonstrating with the ```https://api.refinitiv.com/file-store/v1/``` endpoints for downloading the Client File Store (CFS) file distribution. 
+
+Firstly, let's create a TypeScript class file named ```genericCFS.ts``` file with the following content:
+
+```TypeScript
+//genericCFS.ts
+import { Session,Delivery } from '@refinitiv-data/data';
+
+export class GenericCFSFile {
+    session: Session.Session;
+    cfs_api_version: string;
+
+    constructor(session:any, version = 'v1'){
+        this.session = session;
+        this.cfs_api_version = version;
+    }
+
+    /*
+    * Step 2: Listing the packageId using the Bucket Name
+    * 
+    * To request the CFS Bulk data, the first step is to send an HTTP ```GET``` request to the RDP 
+    * ```/file-store/v1/packages?bucketName={bucket-name}``` endpoint to list all package Ids under the input ```bucket-name```.
+    * 
+    */
+
+    listPackageIds = async (bucket_name = '') => {
+
+        if(bucket_name.length === 0){
+            throw new Error('Received invalid (None or Empty) argument');
+        }
+
+        let response:any = {};
+        try{
+            const param: Delivery.EndpointRequestDefinitionParams = {
+                url: `/file-store/${this.cfs_api_version}/packages`,
+                method: Delivery.EndpointRequest.Method.GET,
+                queryParameters: { 
+                    'bucketName' : bucket_name}
+            };
+           
+            const def = Delivery.EndpointRequest.Definition(param);
+            response = await def.getData(this.session);
+        }
+        catch (err) {
+            console.log(`Failed to request RDP /file-store/${this.cfs_api_version}/packages`);
+            console.log(err);
+            throw new Error(`Failed to request RDP /file-store/${this.cfs_api_version}/packages`);
+        } 
+        return response;
+    }
+}
+```
+
+The ```listPackageIds()``` method above receives a bucket name from a caller, and then sends the HTTP **GET** request to the RDP ```/file-store/v1/packages?bucketName={bucket-name}``` endpoint to list all Package Ids under the input ```bucket-name```.
+
+Next, create a main file name ```rdlib_cfsWorkflow.ts``` to call this ```GenericCFSFile``` class. The file uses the `**Green Revenue bucket** (*bulk-greenrevenue*) as an example Bucket data set.
+
+```TypeScript
+//rdlib_cfsWorkflow.ts
+import { Session } from '@refinitiv-data/data';
+import {GenericCFSFile} from './genericCFS.ts';
+
+const session = Session.Platform.Definition({
+    appKey: 'Your App-Key'!,
+    userName: 'Your User-Id/Machine-ID'!,
+    password: 'Your RDP Password'!,
+    takeSignOnControl: true,
+}).getSession();
+
+(async () => {
+	try {
+		console.log('Opening the session...');
+		
+        /*
+        * Step 1: Authentication with RDP APIs.
+        *
+        */
+		// open the session
+		await session.open();
+		
+		console.log('Session successfully opened');
+
+        const cfsFile = new GenericCFSFile(session);
+
+        let response:any = null;
+
+        /*
+        * Step 2: Listing the packageId using the Bucket Name
+        * 
+        * To request the CFS Bulk data, the first step is to send an HTTP ```GET``` request to the RDP 
+        * ```/file-store/v1/packages?bucketName={bucket-name}``` endpoint to list all package Ids under the input ```bucket-name```.
+        * 
+        */
+        const bucket_name: string = 'bulk-greenrevenue';
+
+        response = await cfsFile.listPackageIds(bucket_name);
+        if(response.data['value'].length === 0){
+            console.log('No data received');
+            process.exit(1);
+        }
+        console.log(`Received data: ${JSON.stringify(response.data['value'][0], null, ' ')}`);
+        ... 
+	} 
+	catch (err) {
+		console.log('Session failed to open !');
+		console.log(err);
+	} 
+	finally {
+		console.log('Closing the session...');
+		await session.close();
+	}
+})();
+```
+
+You see that the ```rdlib_cfsWorkflow.ts``` CFS consumer application does not need to send an authentication request to the RDP ```/auth/oauth2/v1/token``` endpoint and sends the access token to the CFS endpoint manually, the Library manages all that processes for the application.
+
+The rest of the workflow ```rdlib_cfsWorkflow.ts``` and ```genericCFS.ts``` files are implemented based on the [A Step-By-Step Workflow Guide for RDP Client File Store (CFS) API](https://developers.lseg.com/en/article-catalog/article/a-step-by-step-workflow-guide-for-rdp-client-file-store--cfs--ap) article. The completed files are avaiable on the [GitHub](https://github.com/LSEG-API-Samples/Article.RD.TypeScript.Bun) repository.
+
+Example Result (of the completed workflow):
+```bash
+root:/workspaces/Bun_Typscript_RD/src# bun run rdlib_cfsWorkflow.ts 
+[2024-01-03T07:25:13.785Z][ INFO][session:platform] Create session
+Opening the session...
+Session successfully opened
+[2024-01-03T07:25:15.289Z][ INFO][session:platform] Begin request sending...
+Received data: {
+ "packageId": "4316-d43b-81c40763-8e6a-0dbec8162ab1",
+ "packageName": "Bulk-GR-Global-Standard-Full-v1",
+ "contactEmail": "naveen@lseg.com",
+ "created": "2022-09-30T13:45:54Z",
+ "modified": "2023-02-10T09:41:50Z",
+ "packageType": "bulk",
+ "bucketNames": [
+  "bulk-GreenRevenue"
+ ]
+}
+[2024-01-03T07:25:16.007Z][ INFO][session:platform] Begin request sending...
+Received data: {
+ "id": "4183-52de-f8a62bcc-a89d-d0321783ae95",
+ "name": "Bulk-GR-Global-Summary-Full-v1-Jsonl-Delta-2023-12-03T21:00:23.469Z",
+ "bucketName": "bulk-GreenRevenue",
+ "packageId": "4e94-6d63-fea034dc-90e2-de33895bd4e9",
+ "attributes": [
+  {
+   "name": "ContentType",
+   "value": "GR Global Summary Full"
+  }
+ ],
+ "files": [
+  "4b3c-df5e-74cf7606-821f-5aff2f998987"
+ ],
+ "numFiles": 1,
+ "contentFrom": "2023-11-26T20:55:00Z",
+ "contentTo": "2023-12-03T20:55:00Z",
+ "availableFrom": "2023-12-03T21:00:27Z",
+ "availableTo": "2024-01-03T21:00:26Z",
+ "status": "READY",
+ "created": "2023-12-03T21:00:27Z",
+ "modified": "2023-12-03T21:00:28Z"
+}
+4b3c-df5e-74cf7606-821f-5aff2f998987
+[2024-01-03T07:25:16.702Z][ INFO][session:platform] Begin request sending...
+Received data: "https://a206464-bulk-greenrevenue.s3.amazonaws.com/Bulk-GR-Global-Summary-Full-v1/2023/12/03/Bulk-GR-Global-Summary-Full-v1-Delta-2023-12-03T21%3A00%3A23.469Z.jsonl.gz?...7ac55233ebcc53da50e8b8a"
+Downloading Bulk-GR-Global-Summary-Full-v1-Delta-2023-12-03T21_00_23.469Z.jsonl.gz
+Requesting File Success
+Downloading Bulk-GR-Global-Summary-Full-v1-Delta-2023-12-03T21_00_23.469Z.jsonl.gz success
+Closing the session...
+```
+
+
+
