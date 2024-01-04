@@ -179,6 +179,7 @@ src/test.ts
 src/session.config.json
 
 .devcontainer/devcontainer.env
+.env
 
 .vscode/
 src/*.zip

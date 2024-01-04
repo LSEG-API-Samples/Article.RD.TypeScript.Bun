@@ -1,7 +1,7 @@
 export {};
-let username: string = process.env.RDP_USERNAME || '';
-let password: string = process.env.RDP_PASSWORD || '';
-let app_key: string = process.env.RDP_APP_KEY || '';
+let username: string = Bun.env.RDP_USERNAME || '';
+let password: string = Bun.env.RDP_PASSWORD || '';
+let app_key: string = Bun.env.RDP_APP_KEY || '';
 
 const rdp_host: string = 'https://api.refinitiv.com';
 const rdp_auth: string = '/auth/oauth2/v1/token';

@@ -12,7 +12,7 @@ This example project shows how to implement a console [TypeScript](https://www.t
 
 **Note**:
 - Please be informed that this demo project aims for Development and POC purposes only. The Data Library for TypeScript/JavaScript is not tested and qualified with Bun runtime.
-- This project uses Bun version 1.0.18.
+- This project uses Bun version 1.0.21.
 
 ## <a id="bun_intro"></a>What is Bun?
 
@@ -33,7 +33,7 @@ For more detail about Bun runtime, please check the following resources:
 - [Bun Guide](https://bun.sh/guides).
 - [Bun Document](https://bun.sh/docs).
 
-This project was created using `bun init` command in bun v1.0.18. 
+This project was created using `bun init` command in bun v1.0.21. 
 
 ## Step 1: Setting Up Bun Development environment.
 
@@ -44,7 +44,7 @@ The first step is creating a file name ```devcontainer.json``` in the ```.devcon
 ```json
 {
     "name": "BUN RD TypeScript",
-    "image": "oven/bun:1.0.18",
+    "image": "oven/bun:1.0.21",
     "customizations": {
         "vscode": {
             "extensions": ["oven.bun-vscode"],
@@ -164,7 +164,10 @@ The Data Library for TypeScript/JavaScript is available on the [npm](https://www
 
 ```bash
 $bun add @refinitiv-data/data
+```
+Then
 
+```bash
 $bun add -d @types/bun 
 ```
 Once the installation is succeed, the Data Library dependency will be added to the project's package.json file.
@@ -175,8 +178,7 @@ Once the installation is succeed, the Data Library dependency will be added to t
   "module": "src/rdlib_cfsWorkflow.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "^1.0.0",
-    "bun-types": "latest"
+    "@types/bun": "^1.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

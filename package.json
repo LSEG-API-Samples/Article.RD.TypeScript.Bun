@@ -3,8 +3,7 @@
   "module": "src/rdlib_cfsWorkflow.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "^1.0.0",
-    "bun-types": "latest"
+    "@types/bun": "^1.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

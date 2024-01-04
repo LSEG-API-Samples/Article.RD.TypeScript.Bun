@@ -3,9 +3,9 @@ import { Session } from '@refinitiv-data/data';
 import {GenericCFSFile} from './genericCFS.ts';
 
 const session = Session.Platform.Definition({
-    appKey: process.env.RDP_APP_KEY || ''!,
-    userName: process.env.RDP_USERNAME || ''!,
-    password: process.env.RDP_PASSWORD || ''!,
+    appKey: Bun.env.RDP_APP_KEY || ''!,
+    userName: Bun.env.RDP_USERNAME || ''!,
+    password: Bun.env.RDP_PASSWORD || ''!,
     takeSignOnControl: true,
 }).getSession();
 
