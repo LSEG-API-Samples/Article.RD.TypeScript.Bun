@@ -19,7 +19,7 @@ This example project shows how to implement a console [TypeScript](https://www.t
 
 ## <a id="bun_intro"></a>What is Bun?
 
-I will begin by what Bun JavaScript runtime is. [Bun](https://bun.sh/) is an all-in-one JavaScript runtime and toolkit designed for speed, complete with a bundler, test runner, and Node.js-compatible package manager. Bun is built from scratch using the [Zig](http://ziglang.org/) programming language. Unlike Node.js and [Deno](https://deno.com/) that use Chromium's [V8](https://v8.dev/), Bun uses [WebKit] (https://webkit.org/)'s [JavaScriptCore](https://docs.webkit.org/Deep%20Dive/JSC/JavaScriptCore.html) as the JavaScript Engine.
+I will begin by what Bun JavaScript runtime is. [Bun](https://bun.sh/) is an all-in-one JavaScript runtime and toolkit designed for speed, complete with a bundler, test runner, and Node.js-compatible package manager. Bun is built from scratch using the [Zig](http://ziglang.org/) programming language. Unlike Node.js and [Deno](https://deno.com/) that use Chromium's [V8](https://v8.dev/), Bun uses [WebKit](https://webkit.org/)'s [JavaScriptCore](https://docs.webkit.org/Deep%20Dive/JSC/JavaScriptCore.html) as the JavaScript Engine.
 
 The three major design goals of Bun are as follows:
 - **Speed**: Bun starts fast and runs fast. It extends JavaScriptCore, the performance-minded JS engine built for Safari. 
@@ -164,7 +164,7 @@ This project is based on RD Library TypeScript versions **3.13-1-beta** using th
 The Data Library for TypeScript/JavaScript is available on the [npm](https://www.npmjs.com/package/@refinitiv-data/data) package manager platform. We can install the library to our project with the following command
 
 ```bash
-$bun add @refinitiv-data/data
+$bun install @refinitiv-data/data
 ```
 Then run the following command to [install TypeScript declarations for Bun](https://bun.sh/guides/runtime/typescript).
 
