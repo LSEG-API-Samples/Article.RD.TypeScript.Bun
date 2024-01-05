@@ -186,4 +186,4 @@ src/*.zip
 src/*.gz
 *.zip
 *.gz
-build/
+dist/

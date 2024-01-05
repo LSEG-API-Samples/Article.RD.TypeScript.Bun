@@ -10,5 +10,9 @@
   },
   "dependencies": {
     "@refinitiv-data/data": "^3.13.1-beta"
+  },
+  "scripts": {
+    "build": "bun build ./src/rdlib_cfsWorkflow.ts --outdir ./dist --target node --minify",
+    "start": "bun run build && bun run ./dist/rdlib_cfsWorkflow.js"
   }
 }

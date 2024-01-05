@@ -1,3 +1,13 @@
+//|-----------------------------------------------------------------------------
+//|            This source code is provided under the Apache 2.0 license      --
+//|  and is provided AS IS with no warranty or guarantee of fit for purpose.  --
+//|                See the project's LICENSE.md for details.                  --
+//|           Copyright Refinitiv 2024.       All rights reserved.            --
+//|-----------------------------------------------------------------------------
+
+// Example Code Disclaimer:
+// ALL EXAMPLE CODE IS PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS FOR ILLUSTRATIVE PURPOSES ONLY. REFINITIV MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THE EXAMPLE CODE, OR THE INFORMATION, CONTENT, OR MATERIALS USED IN CONNECTION WITH THE EXAMPLE CODE. YOU EXPRESSLY AGREE THAT YOUR USE OF THE EXAMPLE CODE IS AT YOUR SOLE RISK.
+
 // tslint:disable-next-line: no-implicit-dependencies
 import { Session } from '@refinitiv-data/data';
 import {GenericCFSFile} from './genericCFS.ts';
@@ -81,6 +91,7 @@ const session = Session.Platform.Definition({
 
         const file_url: string = response.data['url'];
         const zip_filename:string = file_url.split('?')[0].split("/").slice(-1)[0].replaceAll('%3A','_');
+        const zip_file_location: string = './outputCFS';
         
         console.log(`Downloading ${zip_filename}`);
 
@@ -93,9 +104,11 @@ const session = Session.Platform.Definition({
             process.exit(1);
         } else {
             console.log('Requesting File Success');
+            //Get zip file
             const zipdata: any = await file_response.blob();
-            await Bun.write(zip_filename, zipdata);
-            console.log(`Downloading ${zip_filename} success`);
+            //Save zip file to project's './outputCFS' folder
+            await Bun.write(`${zip_file_location}/${zip_filename}`, zipdata);
+            console.log(`Downloading ${zip_filename} to ${zip_file_location} success`);
         }
 
         await Bun.sleep(1000); // sleep for a while to wait for the file is fully written on disk

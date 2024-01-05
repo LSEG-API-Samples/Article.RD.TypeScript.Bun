@@ -100,21 +100,46 @@ The first step is to unzip or download the example project folder into a directo
     RDP_PASSWORD=<Your RDP Password>
     RDP_APP_KEY=<Your RDP App key>
     ```
-    Please contact your LSEG representative for the Bucket-Name and Package Id information.
 4. Open the VS Code Command Palette with the ```F1``` key, and then select the **Remote-Containers: Reopen in Container** command.
 5. Once this build is completed, VS Code automatically connects to the container, and automatics initializes the project for developers.  Now VS Code is ready for running and testing the Project inside this devcontainer.
 6. To run the RD - Library content layer examples:
 
     ```bash
-    bun run src\rdlib_historical-pricing.ts
+    bun run src/rdlib_historical-pricing.ts
 
-    bun run src\rdlib_news.ts
+    bun run src/rdlib_news.ts
     ```
 7. To run the RD - Library Delivery layer examples:
 
     ```bash
-    bun run src\rdlib_cfsWorkflow.ts
+    bun run src/rdlib_cfsWorkflow.ts
     ```
+### Running as Docker Container
+
+1. Start a Docker desktop or Docker engine on your machine.
+2. create a ```.env``` file in the project folder with the following content
+    ``` INI
+    RDP_USERNAME=<Your RDP Username>
+    RDP_PASSWORD=<Your RDP Password>
+    RDP_APP_KEY=<Your RDP App key>
+    ```
+3. Build a Docker image with the following command:
+    ```bash
+    docker build . -t bun_datalibrary_ts
+    ```
+4. Once this build is completed, run a Docker container with the following command:
+    ```bash
+    docker run -it --name bun_datalibrary_ts --env-file .env -v <full path to outputCFS folder>:/app/outputCFS bun_datalibrary_ts
+    ```
+5. To stop and delete a Docker container, press ``` Ctrl+C``` (or run ```docker stop bun_datalibrary_ts```) then run the following command:
+    ```bash
+    docker rm bun_datalibrary_ts
+    ```
+6. To delete a Docker bun_datalibrary_ts image, run the following command:
+    ```bash
+    docker rmi bun_datalibrary_ts
+    ```
+
 ## <a id="references"></a>References
 
 That brings me to the end of my Bun - RD TypeScript project. For further details, please check out the following resources:
