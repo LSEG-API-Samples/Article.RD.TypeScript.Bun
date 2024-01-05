@@ -645,13 +645,7 @@ Received data: {
 
 If you want to compile tha application into a standalone binary, Bun support [this feature](https://bun.sh/docs/bundler/executables) with ```--compile``` flag with a ```bun build``` command. Please check [Bun.Build](https://bun.sh/docs/bundler) document for more detail about Bun bundler tool and parameters.
 
-## <a id="conclusion"></a>Conclusion
-
-While the [Node.js](https://nodejs.org/en) is still a de factor platform for the JavaScript/TypeScript application development, [Bun](https://bun.sh/) is a good alternative platform for JavaScript/TypeScript developers. It provides a fast runtime, simplify APIs, well written document, and all-in-one toolkit (development, runtime, test, and bundler) for developers. The Node.js-compatible package manager is also a killer feature that makes Node.js developers feel right-at-home when using Bun.
-
-This leads to how easy to use Bun with the easy-to-use [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript). When combining the library development experience with Bun runtime and toolset, developers can create applications that connect and consume data from Refinitiv Data Platform (RDP) easier and faster when comparing to using Node.js.
-
-However, please be noticed that the Data Library for TypeScript is not qualified with Bun runtime yet. But this Prove of Concept (POC) project shows that once the Bun becomes a *mainstream* platform, developers can start using it with the Data Library with confident. 
+That completes my Bun JavaScript runtime experiment with Data Library - TypeScript.
 
 
 

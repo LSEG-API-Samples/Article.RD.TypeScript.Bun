@@ -67,9 +67,9 @@ This project is based on RD Library TypeScript versions **3.13-1-beta** using th
 
 Before I am going further, there is some prerequisite, dependencies, and libraries that the project is needed.
 
-### Access to the RDP with the your desire Bulk file permission
+### Access to the RDP with the your Historical-Pricing, News and CFS file permissions
 
-This project uses RDP access credentials with the CFS Bulk file, Pricing History, and News permission.
+This project uses RDP access credentials with the CFS file, Pricing History, and News permissions.
 
 Please contact your LSEG representative to help you with the RDP account and services.
 
@@ -148,6 +148,13 @@ The first step is to unzip or download the example project folder into a directo
     ```bash
     docker rmi bun_datalibrary_ts
     ```
+## <a id="conclusion"></a>Conclusion
+
+Before I finish, let me just say while the [Node.js](https://nodejs.org/en) is still a de factor platform for the JavaScript/TypeScript application development, [Bun](https://bun.sh/) is a good alternative platform for JavaScript/TypeScript developers. It provides a fast runtime, simplify APIs, well written document, and all-in-one toolkit (development, runtime, test, and bundler) for developers. The Node.js-compatible package manager is also a killer feature that makes Node.js developers feel right-at-home when using Bun.
+
+This leads to how easy to use Bun with the easy-to-use [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript). When combining the library development experience with Bun runtime and toolset, developers can create applications that connect and consume data from Refinitiv Data Platform (RDP) easier and faster when comparing to using Node.js.
+
+However, please be noticed that the Data Library for TypeScript is not qualified with Bun runtime yet. But this Prove of Concept (POC) project shows that once the Bun becomes a *mainstream* platform, developers can start using it with the Data Library with confident. 
 
 ## <a id="references"></a>References
 
