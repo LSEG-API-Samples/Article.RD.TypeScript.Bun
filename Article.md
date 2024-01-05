@@ -1,6 +1,9 @@
 # Experimenting Bun JavaScript Runtime with Data Library - TypeScript
 
-## Overview
+Example Code Disclaimer:
+ALL EXAMPLE CODE IS PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS FOR ILLUSTRATIVE PURPOSES ONLY. REFINITIV MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THE EXAMPLE CODE, OR THE INFORMATION, CONTENT, OR MATERIALS USED IN CONNECTION WITH THE EXAMPLE CODE. YOU EXPRESSLY AGREE THAT YOUR USE OF THE EXAMPLE CODE IS AT YOUR SOLE RISK.
+
+## <a id="overview"></a>Overview
 
 [Bun](https://bun.sh/) is a new JavaScript runtime that aims to be *a drop-in replacement for [Node.js](https://nodejs.org/en/)* with faster startup and run time, more optimized API, and provides a complete toolkit for JavaScript/TypeScript developers.
 
@@ -16,7 +19,7 @@ This example project shows how to implement a console [TypeScript](https://www.t
 
 ## <a id="bun_intro"></a>What is Bun?
 
-[Bun](https://bun.sh/) is an all-in-one JavaScript runtime and toolkit designed for speed, complete with a bundler, test runner, and Node.js-compatible package manager. Bun is built from scratch using the [Zig](http://ziglang.org/) programming language. Unlike Node.js and [Deno](https://deno.com/) that use Chromium's [V8](https://v8.dev/), Bun uses [WebKit] (https://webkit.org/)'s [JavaScriptCore](https://docs.webkit.org/Deep%20Dive/JSC/JavaScriptCore.html) as the JavaScript Engine.
+I will begin by what Bun JavaScript runtime is. [Bun](https://bun.sh/) is an all-in-one JavaScript runtime and toolkit designed for speed, complete with a bundler, test runner, and Node.js-compatible package manager. Bun is built from scratch using the [Zig](http://ziglang.org/) programming language. Unlike Node.js and [Deno](https://deno.com/) that use Chromium's [V8](https://v8.dev/), Bun uses [WebKit] (https://webkit.org/)'s [JavaScriptCore](https://docs.webkit.org/Deep%20Dive/JSC/JavaScriptCore.html) as the JavaScript Engine.
 
 The three major design goals of Bun are as follows:
 - **Speed**: Bun starts fast and runs fast. It extends JavaScriptCore, the performance-minded JS engine built for Safari. 
@@ -35,9 +38,9 @@ For more detail about Bun runtime, please check the following resources:
 
 This project was created using `bun init` command in bun v1.0.21. 
 
-## Step 1: Setting Up Bun Development environment.
+## <a id="step1_setup_env"></a>Step 1: Setting Up Bun Development environment.
 
-To avoid messing up my office machine (I am looking at you ZScaler), this project is implemented and run in a controlled environment such as [Docker](https://www.docker.com/) and [VS Code devcontainer](https://code.visualstudio.com/docs/remote/containers) using the [Bun Docker Image](https://hub.docker.com/r/oven/bun).
+To avoid messing up the office machine (I am looking at you ZScaler), this project is implemented and run in a controlled environment such as [Docker](https://www.docker.com/) and [VS Code devcontainer](https://code.visualstudio.com/docs/remote/containers) using the [Bun Docker Image](https://hub.docker.com/r/oven/bun).
 
 The first step is creating a file name ```devcontainer.json``` in the ```.devcontainer``` folder in the VS Code project as follows:
 
@@ -70,15 +73,13 @@ The next step is creating an empty Bun project with the interactive [bun init](h
 
 ![figure-04](images/04_bun_init.png)
 
-You see that Bun simplify how you can create a development project with minimal interactive questions and gives you all necessary project files such as ```package.json```, ```.gitignore```, ```README.md```, ```tsconfig.json```.
+You see that Bun simplify how you can create a development project with minimal interactive questions and gives you all necessary project files such as ```package.json```, ```.gitignore```, ```README.md```, ```tsconfig.json``` files.
 
 Now you can start write the TypeScript source code in the project.
 
 ```TypeScript
 //index.ts
-(async () => {
-    console.log('Hello Bun...');
-})();
+console.log('Hello Bun...');
 ```
 
 And run the application with the following command:
@@ -88,7 +89,7 @@ $#bun run index.ts
 
 Hello Bun...
 ```
-This Bun development environment is ready for implementing the RDP HTTP application like the following example
+This VS Code Bun development environment is ready for implementing the RDP HTTP application like the following example
 
 ```TypeScript
 //index.ts
@@ -135,11 +136,11 @@ Result:
 
 ![figure-05](images/05_bun_pure_rdp_result.png)
 
-Let's leave this core RDP HTTP APIs application implementation there. I am going to use the Data Library for TypeScript to connect and consume data from RDP platform instead.
+Let's leave this core RDP HTTP APIs application implementation there. I am going to use the Data Library for TypeScript to connect and consume data from RDP platform.
 
-## <a id="rdp_lib"></a>Introduction to the Data Library for TypeScript
+## <a id="datalibrary_intro"></a>Introduction to the Data Library for TypeScript
 
-The Data Library for TypeScript is an ease-of-use API defining a set of uniform interfaces providing the developer access to the Refinitiv Data Platform.  The APIs are designed to provide consistent access through multiple access channels, spanning multiple programming languages that target both Professional Developers and Financial Coders.  Developers can choose to access content from the desktop, within a desktop container, through their deployed streaming services, or directly to the cloud.  The interfaces encompass a set of unified Web APIs providing access to both streaming (over WebSockets) and non-streaming (HTTP REST) data available within the platform.
+Now let me move on to Data Library. The Data Library for TypeScript is an ease-of-use API defining a set of uniform interfaces providing the developer access to the Refinitiv Data Platform.  The APIs are designed to provide consistent access through multiple access channels, spanning multiple programming languages that target both Professional Developers and Financial Coders.  Developers can choose to access content from the desktop, within a desktop container, through their deployed streaming services, or directly to the cloud.  The interfaces encompass a set of unified Web APIs providing access to both streaming (over WebSockets) and non-streaming (HTTP REST) data available within the platform.
 
 ![figure-06](images/rdlib_image.png "Data Library Diagram") 
 
@@ -158,19 +159,19 @@ For more deep detail regarding the RDP Libraries, please refer to the following 
 
 This project is based on RD Library TypeScript versions **3.13-1-beta** using the Platform Session only. The method signatures, data formats, etc are subject to change.
 
-## Step 2: Installing Data Library for TypeScript.
+## <a id="step2_install_library"></a>Step 2: Installing Data Library for TypeScript.
 
 The Data Library for TypeScript/JavaScript is available on the [npm](https://www.npmjs.com/package/@refinitiv-data/data) package manager platform. We can install the library to our project with the following command
 
 ```bash
 $bun add @refinitiv-data/data
 ```
-Then
+Then run the following command to [install TypeScript declarations for Bun](https://bun.sh/guides/runtime/typescript).
 
 ```bash
 $bun add -d @types/bun 
 ```
-Once the installation is succeed, the Data Library dependency will be added to the project's package.json file.
+Once the installations are succeed, the Data Library dependency will be added to the project's package.json file.
 
 ```JSON
 {
@@ -223,9 +224,9 @@ Result:
 
 That covers the Data Library installation in our Bun project.
 
-## Step 3: The Content Layer 
+## <a id="step3_content_layer"></a>Step 3: The Content Layer 
 
-The Content layer refers to logical market data objects, representing financial items like level 1 market data prices and quotes, Order Books, News, Historical Pricing, Company Research data and so on. 
+Now we come to the Data Library Content Layer feature. The Content layer refers to logical market data objects, representing financial items like level 1 market data prices and quotes, Order Books, News, Historical Pricing, Company Research data and so on. 
 
 Let's start with the ```HistoricalPricing.Summaries``` object that provides access to the historical pricing intraday (or other time periods) summary data, and the ability to filter them by types, such as start time, end time, and market session durations. We can start by creating a  file name ```rdlib_historical-pricing.ts``` file in a ```src``` folder as follows.
 
@@ -321,7 +322,7 @@ Closing the session...
 
 For more detail about the ```HistoricalPricing.Summaries``` object, please check the Data Library [HistoricalPricing.Summaries.Definition document](https://cdn.refinitiv.com/public/rd-lib-ts-doc/1.0.0.0/book/en/sections/content-layer/historical-pricing/summaries/definition.html).
 
-Next, let's try the ```News``` object that allows you to retrieve Headlines and Story data stored on the Refinitiv Data Platform. The code is ```rdlib_news.ts``` in a ```src``` folder.
+So, now let’s look at the ```News``` object that allows you to retrieve Headlines and Story data stored on the Refinitiv Data Platform. The code is ```rdlib_news.ts``` in a ```src``` folder.
 
 Source Code:
 ```TypeScript
@@ -394,11 +395,11 @@ Closing the session...
 
 For more detail about the ```News.Headlines``` and ```News.Story``` objects, please check the Data Library [News document](https://cdn.refinitiv.com/public/rd-lib-ts-doc/1.0.0.0/book/en/sections/content-layer/news/intro.html).
 
-That is all for the Content Layer.
+That is all for the Data Library Content Layer.
 
-## Step 4: The Delivery Layer 
+## <a id="step4_delivery_layer"></a>Step 4: The Delivery Layer 
 
-The Delivery layer refers to lowest abstraction layer of the library such as Level 1 & 2 Streaming Data and Request/Reply data endpoints interfaces, etc. This article is focusing on the Delivery interface to retrieve LSEG content directly from an Endpoint.
+My next point is the Data Library Delivery Layer. The Delivery layer refers to lowest abstraction layer of the library such as Level 1 & 2 Streaming Data and Request/Reply data endpoints interfaces, etc. This article is focusing on the Delivery interface to retrieve LSEG content directly from an Endpoint.
 
 ### Endpoint Interface
 
@@ -535,7 +536,7 @@ You see that the ```rdlib_cfsWorkflow.ts``` CFS consumer application does not ne
 
 The rest of the workflow ```rdlib_cfsWorkflow.ts``` and ```genericCFS.ts``` files are implemented based on the [A Step-By-Step Workflow Guide for RDP Client File Store (CFS) API](https://developers.lseg.com/en/article-catalog/article/a-step-by-step-workflow-guide-for-rdp-client-file-store--cfs--ap) article. The completed files are avaiable on the [GitHub](https://github.com/LSEG-API-Samples/Article.RD.TypeScript.Bun) repository.
 
-Example Result (of the completed workflow):
+Example Result of the completed workflow application:
 ```bash
 root:/workspaces/Bun_Typscript_RD/src# bun run rdlib_cfsWorkflow.ts 
 [2024-01-03T07:25:13.785Z][ INFO][session:platform] Create session
@@ -585,11 +586,13 @@ Downloading Bulk-GR-Global-Summary-Full-v1-Delta-2023-12-03T21_00_23.469Z.jsonl.
 Closing the session...
 ```
 
-## Bundler 
+That covers the Data Library Delivery feature demonstration.
 
-A bundler is development tool for combinding multilple JavaScript/TypeScript files into a single file that optimized to be run in the client environment (web browsers, node runtime, etc). This single static file helps the client machine does not need to fetch many files including multiple dependencies. 
+## <a id="step5_bundler"></a>Step 5: Bundler the application
 
-While the Node.js applications need to use external tools like [Webpack](https://webpack.js.org/), [Parcel](https://parceljs.org/), [Rollup](https://rollupjs.org/), etc for the module bulder, Bun has a native [bundler tool](https://bun.sh/docs/bundler) out of the box. Developer can use a ```bun build``` command to produce a single distribution file.
+Now we come to how to delivery the application using a bundler tool. A bundler is development tool for combinding multilple JavaScript/TypeScript files into a single file that optimized to be run in the client environment (web browsers, node runtime, etc). This single static file helps the client machine does not need to fetch many files including multiple dependencies. 
+
+While the Node.js applications need external tools like [Webpack](https://webpack.js.org/), [Parcel](https://parceljs.org/), [Rollup](https://rollupjs.org/), etc for the module bulder, Bun has a native [bundler tool](https://bun.sh/docs/bundler) out of the box. Developer can use a ```bun build``` command to produce a single distribution file.
 
 **Note**: Bun's fast native bundler is now in beta phase.
 
@@ -608,7 +611,7 @@ $bun build --entrypoints {entrypoint} --outdir ./build --target {target} --minif
 I am showing how to bundler the ```rdlib_cfsWorkflow``` application as follows:
 
 ```bash
-root:/workspaces/Bun_Typscript_RD# bun build ./src/rdlib_cfsWorkflow.ts --outdir ./build --target node --minify
+root:/workspaces/Bun_Typscript_RD# bun build ./src/rdlib_cfsWorkflow.ts --outdir ./dist --target node --minify
 
   ./rdlib_cfsWorkflow.js  896.68 KB
 
@@ -619,10 +622,10 @@ root:/workspaces/Bun_Typscript_RD#
 Result:
 ![figure-08](images/07_bun_bundler.png)
 
-Then, we can run a ```./build/rdlib_cfsWorkflow.js``` application file to get the CFS data from RDP the same way as the ```rdlib_cfsWorkflow``` application.
+Then all dependencies have been bundlered to a single ```./dist/rdlib_cfsWorkflow.js``` application file. We can run this file to get the CFS data from RDP the same way as the ```rdlib_cfsWorkflow``` application as follows:
 
 ```bash
-root@:/workspaces/Bun_Typscript_RD/build# bun run rdlib_cfsWorkflow.js 
+root@:/workspaces/Bun_Typscript_RD# bun run ./dist/rdlib_cfsWorkflow.js 
 [2024-01-03T10:07:20.585Z][ INFO][session:platform] Create session
 Opening the session...
 Session successfully opened
@@ -640,9 +643,9 @@ Received data: {
 ...
 ```
 
-Please check [Bun.Build](https://bun.sh/docs/bundler) document for more detail about Bun bundler tool and parameters.
+If you want to compile tha application into a standalone binary, Bun support [this feature](https://bun.sh/docs/bundler/executables) with ```--compile``` flag with a ```bun build``` command. Please check [Bun.Build](https://bun.sh/docs/bundler) document for more detail about Bun bundler tool and parameters.
 
-## Conclusion
+## <a id="conclusion"></a>Conclusion
 
 While the [Node.js](https://nodejs.org/en) is still a de factor platform for the JavaScript/TypeScript application development, [Bun](https://bun.sh/) is a good alternative platform for JavaScript/TypeScript developers. It provides a fast runtime, simplify APIs, well written document, and all-in-one toolkit (development, runtime, test, and bundler) for developers. The Node.js-compatible package manager is also a killer feature that makes Node.js developers feel right-at-home when using Bun.
 

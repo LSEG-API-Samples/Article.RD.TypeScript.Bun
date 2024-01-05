@@ -4,7 +4,10 @@
 - Environment: VS Code Devcontainer, Docker
 - Prerequisite: [Prerequisite](#prerequisite)
 
-## Overview
+Example Code Disclaimer:
+ALL EXAMPLE CODE IS PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS FOR ILLUSTRATIVE PURPOSES ONLY. REFINITIV MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THE EXAMPLE CODE, OR THE INFORMATION, CONTENT, OR MATERIALS USED IN CONNECTION WITH THE EXAMPLE CODE. YOU EXPRESSLY AGREE THAT YOUR USE OF THE EXAMPLE CODE IS AT YOUR SOLE RISK.
+
+## <a id="overview"></a>Overview
 
 [Bun](https://bun.sh/) is a new JavaScript runtime that aims to be *a drop-in replacement for [Node.js](https://nodejs.org/en/)* with faster startup and run time, more optimized API, and provides a complete toolkit for JavaScript/TypeScript developers.
 
@@ -113,6 +116,12 @@ The first step is to unzip or download the example project folder into a directo
 
     ```bash
     bun run src/rdlib_cfsWorkflow.ts
+    ```
+
+    or
+
+    ```bash
+    bun start
     ```
 ### Running as Docker Container
 

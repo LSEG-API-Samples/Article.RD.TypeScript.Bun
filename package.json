@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "bun build ./src/rdlib_cfsWorkflow.ts --outdir ./dist --target node --minify",
+    "compile": "bun build ./src/rdlib_cfsWorkflow.ts --compile --outfile ./dist/rdlib_cfsWorkflow",
     "start": "bun run build && bun run ./dist/rdlib_cfsWorkflow.js"
   }
 }
