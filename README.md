@@ -158,7 +158,7 @@ However, please be noticed that the Data Library for TypeScript is not qualified
 
 ## <a id="references"></a>References
 
-That brings me to the end of my Bun - RD TypeScript project. For further details, please check out the following resources:
+That brings me to the end of my Bun - Data Library TypeScript project. For further details, please check out the following resources:
 
 * [Data Library for TypeScript page](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) on the [LSEG Developer Community](https://developers.lseg.com/) website.
 * [Data Libraries Family page](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-libraries).
