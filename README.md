@@ -46,7 +46,7 @@ This project was created using `bun init` command in bun v1.0.21.
 
 ## <a id="rdp_lib"></a>Introduction to the Data Library for TypeScript
 
-The Data Library for TypeScript is an ease-of-use API defining a set of uniform interfaces providing the developer access to the Data Platform.  The APIs are designed to provide consistent access through multiple access channels, spanning multiple programming languages that target both Professional Developers and Financial Coders.  Developers can choose to access content from the desktop, within a desktop container, through their deployed streaming services, or directly to the cloud.  The interfaces encompass a set of unified Web APIs providing access to both streaming (over WebSockets) and non-streaming (HTTP REST) data available within the platform.
+The [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) is an ease-of-use API defining a set of uniform interfaces providing the developer access to the [Data Platform](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis).  The APIs are designed to provide consistent access through multiple access channels, spanning multiple programming languages that target both Professional Developers and Financial Coders.  Developers can choose to access content from the desktop, within a desktop container, through their deployed streaming services, or directly to the cloud.  The interfaces encompass a set of unified Web APIs providing access to both streaming (over WebSockets) and non-streaming (HTTP REST) data available within the platform.
 
 ![Figure-1](images/rdlib_image.png "Data Library Diagram") 
 
