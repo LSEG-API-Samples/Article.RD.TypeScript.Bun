@@ -146,12 +146,14 @@ The [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/ref
 
 ![Figure-1](images/rdlib_image.png "Data Library Diagram") 
 
-The RDP Library are available in the following programming languages:
+The Libraries are available in the following programming languages:
+
 - [Python](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python)
 - [TypeScript/JavaScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript)
 - [.NET](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for--net)
 
-For more deep detail regarding the RDP Libraries, please refer to the following articles and tutorials:
+For more deep detail regarding the Data Library for Python version1, please refer to the following articles and tutorials:
+
 - [Quickstart](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/quick-start).
 - [Documentation](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/documentation).
 - [Tutorials](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/tutorials).
