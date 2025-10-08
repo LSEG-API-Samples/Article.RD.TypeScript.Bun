@@ -9,9 +9,11 @@ ALL EXAMPLE CODE IS PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS FOR 
 
 Bun [just released version 1.0](https://www.youtube.com/watch?v=BsnCpESUEqM) ("production-ready") on September 2023 (the current version is 1.0.21, as of January 2024).
 
-One of Bun features is the [Node.js compatibility](https://bun.sh/docs/runtime/nodejs-apis). Most [NPM](https://www.npmjs.com/) modules intended to work with Node.js will work with Bun out of the box. This is a good opportunity to test [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) with Bun runtime to consume data from [Refinitiv Data Platform (RDP)](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis) as an experimental project.
+One of Bun features is the [Node.js compatibility](https://bun.sh/docs/runtime/nodejs-apis). Most [NPM](https://www.npmjs.com/) modules intended to work with Node.js will work with Bun out of the box. This is a good opportunity to test [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) with Bun runtime to consume data from [Data Platform](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis) (aka Delivery Platform or RDP, formerly known as Refinitiv Data Platform) as an experimental project.
 
-This example project shows how to implement a console [TypeScript](https://www.typescriptlang.org) application to retrieve financial data using ease-of-use [Data Library for TypeScript](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) on Bun runtime.  
+This example project shows how to implement a console [TypeScript](https://www.typescriptlang.org) application to retrieve financial data using ease-of-use [Data Library for TypeScript version 1](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript) on Bun runtime.  The project is implemented and run in a controlled environment such as [Docker](https://www.docker.com/) and [devcontainer](https://code.visualstudio.com/docs/remote/containers) using the [Bun Docker Image](https://hub.docker.com/r/oven/bun).
+
+**Update October 2025**: The [Data Library for TypeScript version 2](https://developers.lseg.com/en/api-catalog/lseg-data-platform/lseg-data-library-for-typescript) (aka LSEG Data Library for TypeScript) is now available.
 
 **Note**:
 - Please be informed that this demo project aims for Development and POC purposes only. The Data Library for TypeScript/JavaScript is not tested and qualified with Bun runtime.
@@ -140,9 +142,9 @@ Let's leave this core RDP HTTP APIs application implementation there. I am going
 
 ## <a id="datalibrary_intro"></a>Introduction to the Data Library for TypeScript
 
-Now let me move on to Data Library. The Data Library for TypeScript is an ease-of-use API defining a set of uniform interfaces providing the developer access to the Refinitiv Data Platform.  The APIs are designed to provide consistent access through multiple access channels, spanning multiple programming languages that target both Professional Developers and Financial Coders.  Developers can choose to access content from the desktop, within a desktop container, through their deployed streaming services, or directly to the cloud.  The interfaces encompass a set of unified Web APIs providing access to both streaming (over WebSockets) and non-streaming (HTTP REST) data available within the platform.
+The Data Library for TypeScript is an ease-of-use API defining a set of uniform interfaces providing the developer access to the Data Platform.  The APIs are designed to provide consistent access through multiple access channels, spanning multiple programming languages that target both Professional Developers and Financial Coders.  Developers can choose to access content from the desktop, within a desktop container, through their deployed streaming services, or directly to the cloud.  The interfaces encompass a set of unified Web APIs providing access to both streaming (over WebSockets) and non-streaming (HTTP REST) data available within the platform.
 
-![figure-06](images/rdlib_image.png "Data Library Diagram") 
+![Figure-1](images/rdlib_image.png "Data Library Diagram") 
 
 The RDP Library are available in the following programming languages:
 - [Python](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python)
@@ -155,9 +157,12 @@ For more deep detail regarding the RDP Libraries, please refer to the following 
 - [Tutorials](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-typescript/tutorials).
 - [GitHub](https://github.com/LSEG-API-Samples/Example.DataLibrary.TypeScript).
 
+**Update October 2025**: The [Data Library for TypeScript version 2](https://developers.lseg.com/en/api-catalog/lseg-data-platform/lseg-data-library-for-typescript) (aka LSEG Data Library for TypeScript) is now available.
+
 ### Disclaimer
 
-This project is based on RD Library TypeScript versions **3.13-1-beta** using the Platform Session only. The method signatures, data formats, etc are subject to change.
+This project is based on Data Library for TypeScript version 1 (RD Library TypeScript) using the Platform Session only. 
+
 
 ## <a id="step2_install_library"></a>Step 2: Installing Data Library for TypeScript.
 
@@ -322,7 +327,7 @@ Closing the session...
 
 For more detail about the ```HistoricalPricing.Summaries``` object, please check the Data Library [HistoricalPricing.Summaries.Definition document](https://cdn.refinitiv.com/public/rd-lib-ts-doc/1.0.0.0/book/en/sections/content-layer/historical-pricing/summaries/definition.html).
 
-So, now let’s look at the ```News``` object that allows you to retrieve Headlines and Story data stored on the Refinitiv Data Platform. The code is ```rdlib_news.ts``` in a ```src``` folder.
+So, now let’s look at the ```News``` object that allows you to retrieve Headlines and Story data stored on the Data Platform. The code is ```rdlib_news.ts``` in a ```src``` folder.
 
 Source Code:
 ```TypeScript
